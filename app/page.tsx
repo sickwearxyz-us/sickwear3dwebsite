@@ -272,7 +272,15 @@ export default function Home() {
                   >
                     <a
                       href={item.href}
-                      onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); const el = document.getElementById(item.id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                          const top = el.offsetTop - 80;
+                          window.scrollTo({ top, behavior: 'smooth' });
+                        }
+                        setTimeout(() => setMobileMenuOpen(false), 100);
+                      }}
                       className={`text-xl font-medium transition-colors ${
                         activeSection === item.id ? "text-[#BFF000]" : "text-white hover:text-[#BFF000]"
                       }`}
@@ -764,57 +772,51 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Mobile Flowchart - Reverse S layout */}
-            <div className="md:hidden px-2">
-              {[
-                { icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", label: "Discovery", isStart: true },
-                { icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", label: "Brief" },
-                { icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Mockup" },
-                { icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01", label: "Production" },
-                { icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", label: "QC & Pack" },
-                { icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4", label: "Shipping" },
-                { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Delivery", isEnd: true },
-              ].reduce((rows: any[][], step, i) => {
-                const rowIndex = Math.floor(i / 3);
-                if (!rows[rowIndex]) rows[rowIndex] = [];
-                rows[rowIndex].push({ ...step, originalIndex: i });
-                return rows;
-              }, []).map((row, rowIndex) => {
-                const isEven = rowIndex % 2 === 0;
-                const displayRow = isEven ? row : [...row].reverse();
-                return (
-                  <div key={rowIndex}>
-                    <div className="flex items-center justify-between">
-                      {displayRow.map((step: any, colIndex: number) => (
-                        <div key={colIndex} className="flex items-center">
-                          <div className="flex flex-col items-center">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                              step.isStart || step.isEnd
-                                ? 'bg-[#BFF000] text-black border-[#BFF000]'
-                                : 'bg-transparent text-white border-white/50'
-                            }`}>
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
-                              </svg>
+            {/* Mobile Flowchart - Reverse S, 2 steps per row */}
+            <div className="md:hidden px-4">
+              {(() => {
+                const steps = [
+                  { icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", label: "Discovery", isStart: true },
+                  { icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", label: "Brief" },
+                  { icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Mockup" },
+                  { icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01", label: "Production" },
+                  { icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", label: "QC & Pack" },
+                  { icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4", label: "Shipping" },
+                  { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Delivery", isEnd: true },
+                ];
+                const rows: any[][] = [];
+                for (let i = 0; i < steps.length; i += 2) rows.push(steps.slice(i, i + 2));
+                return rows.map((row, rowIdx) => {
+                  const isEven = rowIdx % 2 === 0;
+                  const displayRow = isEven ? row : [...row].reverse();
+                  return (
+                    <div key={rowIdx}>
+                      <div className="flex items-center justify-center gap-4">
+                        {displayRow.map((step: any, colIdx: number) => (
+                          <div key={colIdx} className="flex items-center gap-3">
+                            <div className="flex flex-col items-center">
+                              <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${step.isStart || step.isEnd ? 'bg-[#BFF000] text-black border-[#BFF000]' : 'bg-transparent text-white border-white/50'}`}>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
+                                </svg>
+                              </div>
+                              <span className={`mt-1.5 text-xs font-medium text-center ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white'}`}>{step.label}</span>
                             </div>
-                            <span className={`mt-1.5 text-[10px] font-medium ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white'}`}>
-                              {step.label}
-                            </span>
+                            {colIdx < displayRow.length - 1 && (
+                              <div className="w-12 h-px bg-[#BFF000]/40 flex-shrink-0" />
+                            )}
                           </div>
-                          {colIndex < displayRow.length - 1 && (
-                            <div className="w-8 h-px bg-[#BFF000]/40 mx-1 flex-shrink-0" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                    {rowIndex < 1 && (
-                      <div className={`flex ${isEven ? 'justify-end' : 'justify-start'} my-1`}>
-                        <div className="w-px h-6 bg-[#BFF000]/40" />
+                        ))}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
+                      {rowIdx < rows.length - 1 && (
+                        <div className={`flex my-2 ${isEven ? 'justify-end pr-10' : 'justify-start pl-10'}`}>
+                          <div className="w-px h-8 bg-[#BFF000]/40" />
+                        </div>
+                      )}
+                    </div>
+                  );
+                });
+              })()}
               <p className="text-center text-[10px] text-gray-500 mt-4">
                 <span className="text-[#BFF000]">*</span> Samples on request
               </p>
@@ -925,7 +927,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-0 z-50 flex items-center justify-center"
+                className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer"
                 onClick={() => setSelectedCategory(null)}
               >
                 <div className="absolute inset-0 bg-black" />
@@ -935,28 +937,17 @@ export default function Home() {
                   exit={{ scale: 0.92, opacity: 0 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   className="relative w-full h-full flex items-center justify-center"
-                  onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Close button */}
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCategory(null)}
-                    className="absolute top-5 right-5 md:top-8 md:right-8 text-white/60 hover:text-white transition-colors z-20"
-                  >
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-
                   {/* Category title top-left */}
                   <div className="absolute top-5 left-5 md:top-8 md:left-8 z-20">
                     <h3 className="text-2xl md:text-3xl font-bold text-[#BFF000]">
                       {selectedCategory.name}
                     </h3>
+                    <p className="text-white/40 text-xs mt-1">Tap anywhere outside to close</p>
                   </div>
 
                   {/* Image with labels overlaid under each product */}
-                  <div className="relative w-full h-full flex items-center justify-center p-6 md:p-12">
+                  <div className="relative w-full h-full flex items-center justify-center p-6 md:p-12" onClick={(e) => e.stopPropagation()}>
                     <div className="relative aspect-square" style={{ height: "min(85vh, 85vw)" }}>
                       <img
                         src={selectedCategory.img || "/placeholder.svg"}
@@ -1039,33 +1030,47 @@ export default function Home() {
             </motion.p>
           </motion.div>
 
-          {/* Gallery Lightbox */}
+          {/* Gallery Lightbox with swipe */}
           <AnimatePresence>
             {lightboxImg && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+                className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
                 onClick={() => setLightboxImg(null)}
               >
                 <motion.div
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.8 }}
-                  className="relative max-w-4xl max-h-[90vh] w-full"
+                  className="relative max-w-4xl max-h-[90vh] w-full cursor-default"
                   onClick={(e) => e.stopPropagation()}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={(_e, info) => {
+                    const allImgs = [
+                      "/images/gallery/ethindia-flatlay.png","/images/gallery/debridge-hoodie.jpg","/images/gallery/wave-kimono.jpg","/images/gallery/fhe-summit.jpg","/images/gallery/ethindia-tote-bag.jpg","/images/gallery/socket-box.jpg","/images/gallery/eigencloud-sunglasses.jpg",
+                      "/images/gallery/event-capes.png","/images/gallery/cdp-backpack-ethindia.jpg","/images/gallery/story-merch.jpg","/images/gallery/ethmumbai-tote.jpg","/images/gallery/multipli-set.png","/images/gallery/og-socks-ethglobal.jpg","/images/gallery/aethir-merch.jpg",
+                      "/images/gallery/gpu-rich-tees.jpg","/images/gallery/katerina-leather-set.jpg","/images/gallery/chain-abstraction-mafia.jpg","/images/gallery/altlayer-tshirts.jpg","/images/gallery/talus-box.jpg","/images/gallery/biconomy-tshirt-varanasi.jpg","/images/gallery/ethglobal-swag-bag.jpg","/images/gallery/arbitrum-event.jpg",
+                      "/images/gallery/notlikesus-hoodie.jpg","/images/gallery/copperx-cap.jpg","/images/gallery/fluent-merch-table.jpg","/images/gallery/openhouse-merch.png","/images/gallery/devcon-leather-wallet.jpg","/images/gallery/akave-socks.png","/images/gallery/ethglobal-cannes-tote.jpg","/images/gallery/fluent-blend.jpg","/images/gallery/1inch-merch.jpg",
+                    ];
+                    const idx = allImgs.indexOf(lightboxImg);
+                    if (info.offset.x < -80 && idx < allImgs.length - 1) setLightboxImg(allImgs[idx + 1]);
+                    if (info.offset.x > 80 && idx > 0) setLightboxImg(allImgs[idx - 1]);
+                  }}
                 >
-                  <img src={lightboxImg} alt="Gallery" className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
-                  <button onClick={() => setLightboxImg(null)} className="absolute top-3 right-3 w-9 h-9 bg-black/60 rounded-full flex items-center justify-center text-white hover:text-[#BFF000] transition-colors text-xl">✕</button>
+                  <img src={lightboxImg} alt="Gallery" className="w-full h-auto max-h-[85vh] object-contain rounded-lg select-none" draggable={false} />
+                  <p className="text-center text-white/30 text-xs mt-2">Swipe left / right to browse · Tap outside to close</p>
                 </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Gallery Masonry Grid - balanced 4 columns */}
+          {/* Gallery Masonry Grid - balanced 4 columns desktop, 2 columns mobile */}
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2">
-            {/* Column 1 */}
+            {/* Column 1 — 7 items */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/ethindia-flatlay.png", alt: "ETHIndia branded merch flat-lay" },
@@ -1074,7 +1079,7 @@ export default function Home() {
                 { src: "/images/gallery/fhe-summit.jpg", alt: "FHE Summit branded t-shirts" },
                 { src: "/images/gallery/ethindia-tote-bag.jpg", alt: "ETHIndia illustrated tote bag" },
                 { src: "/images/gallery/socket-box.jpg", alt: "Socket branded merch gift box" },
-                { src: "/images/gallery/eigencloud-sunglasses.jpg", alt: "EigenCloud branded sunglasses at Vibecon" },
+                { src: "/images/gallery/eigencloud-sunglasses.jpg", alt: "EigenCloud branded sunglasses" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1083,7 +1088,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 2 */}
+            {/* Column 2 — 8 items */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/event-capes.png", alt: "Branded capes at conference" },
@@ -1093,6 +1098,7 @@ export default function Home() {
                 { src: "/images/gallery/multipli-set.png", alt: "Multipli branded black merch set" },
                 { src: "/images/gallery/og-socks-ethglobal.jpg", alt: "OG branded socks at ETHGlobal" },
                 { src: "/images/gallery/aethir-merch.jpg", alt: "Aethir branded t-shirts and stickers" },
+                { src: "/images/gallery/fluent-blend.jpg", alt: "Fluent and Blend branded t-shirts" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.03 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1101,7 +1107,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 3 */}
+            {/* Column 3 — 8 items */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/gpu-rich-tees.jpg", alt: "GPU Rich branded t-shirts" },
@@ -1109,9 +1115,9 @@ export default function Home() {
                 { src: "/images/gallery/chain-abstraction-mafia.jpg", alt: "Chain Abstraction Mafia team t-shirts" },
                 { src: "/images/gallery/altlayer-tshirts.jpg", alt: "AltLayer branded t-shirts display" },
                 { src: "/images/gallery/talus-box.jpg", alt: "Talus branded merch gift box" },
-                { src: "/images/gallery/biconomy-tshirt-varanasi.jpg", alt: "Biconomy branded t-shirt at Varanasi ghats" },
+                { src: "/images/gallery/biconomy-tshirt-varanasi.jpg", alt: "Biconomy t-shirt at Varanasi ghats" },
                 { src: "/images/gallery/ethglobal-swag-bag.jpg", alt: "ETHGlobal New Delhi swag bag" },
-                { src: "/images/gallery/arbitrum-event.jpg", alt: "Arbitrum Open House event" },
+                { src: "/images/gallery/1inch-merch.jpg", alt: "1inch branded merch set flat-lay" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.02 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1120,7 +1126,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 4 */}
+            {/* Column 4 — 8 items */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/notlikesus-hoodie.jpg", alt: "Not Like Sus custom hoodie back print" },
@@ -1130,8 +1136,7 @@ export default function Home() {
                 { src: "/images/gallery/devcon-leather-wallet.jpg", alt: "Devcon leather wallet and accessories" },
                 { src: "/images/gallery/akave-socks.png", alt: "AKAVE branded socks" },
                 { src: "/images/gallery/ethglobal-cannes-tote.jpg", alt: "ETHGlobal Cannes illustrated tote bag" },
-                { src: "/images/gallery/fluent-blend.jpg", alt: "Fluent and Blend branded t-shirts" },
-                { src: "/images/gallery/1inch-merch.jpg", alt: "1inch branded merch set flat-lay" },
+                { src: "/images/gallery/arbitrum-event.jpg", alt: "Arbitrum Open House event" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.05 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
