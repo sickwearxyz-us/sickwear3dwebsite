@@ -274,12 +274,11 @@ export default function Home() {
                       href={item.href}
                       onClick={(e) => {
                         e.preventDefault();
-                        const el = document.getElementById(item.id);
-                        if (el) {
-                          const top = el.offsetTop - 80;
-                          window.scrollTo({ top, behavior: 'smooth' });
-                        }
-                        setTimeout(() => setMobileMenuOpen(false), 100);
+                        setMobileMenuOpen(false);
+                        setTimeout(() => {
+                          const el = document.getElementById(item.id);
+                          if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+                        }, 350);
                       }}
                       className={`text-xl font-medium transition-colors ${
                         activeSection === item.id ? "text-[#BFF000]" : "text-white hover:text-[#BFF000]"
@@ -943,7 +942,6 @@ export default function Home() {
                     <h3 className="text-2xl md:text-3xl font-bold text-[#BFF000]">
                       {selectedCategory.name}
                     </h3>
-                    <p className="text-white/40 text-xs mt-1">Tap anywhere outside to close</p>
                   </div>
 
                   {/* Image with labels overlaid under each product */}
@@ -1030,7 +1028,7 @@ export default function Home() {
             </motion.p>
           </motion.div>
 
-          {/* Gallery Lightbox with swipe */}
+          {/* Gallery Lightbox - click outside to close */}
           <AnimatePresence>
             {lightboxImg && (
               <motion.div
@@ -1046,23 +1044,8 @@ export default function Home() {
                   exit={{ scale: 0.8 }}
                   className="relative max-w-4xl max-h-[90vh] w-full cursor-default"
                   onClick={(e) => e.stopPropagation()}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.2}
-                  onDragEnd={(_e, info) => {
-                    const allImgs = [
-                      "/images/gallery/ethindia-flatlay.png","/images/gallery/debridge-hoodie.jpg","/images/gallery/wave-kimono.jpg","/images/gallery/fhe-summit.jpg","/images/gallery/ethindia-tote-bag.jpg","/images/gallery/socket-box.jpg","/images/gallery/eigencloud-sunglasses.jpg",
-                      "/images/gallery/event-capes.png","/images/gallery/cdp-backpack-ethindia.jpg","/images/gallery/story-merch.jpg","/images/gallery/ethmumbai-tote.jpg","/images/gallery/multipli-set.png","/images/gallery/og-socks-ethglobal.jpg","/images/gallery/aethir-merch.jpg",
-                      "/images/gallery/gpu-rich-tees.jpg","/images/gallery/katerina-leather-set.jpg","/images/gallery/chain-abstraction-mafia.jpg","/images/gallery/altlayer-tshirts.jpg","/images/gallery/talus-box.jpg","/images/gallery/biconomy-tshirt-varanasi.jpg","/images/gallery/ethglobal-swag-bag.jpg","/images/gallery/arbitrum-event.jpg",
-                      "/images/gallery/notlikesus-hoodie.jpg","/images/gallery/copperx-cap.jpg","/images/gallery/fluent-merch-table.jpg","/images/gallery/openhouse-merch.png","/images/gallery/devcon-leather-wallet.jpg","/images/gallery/akave-socks.png","/images/gallery/ethglobal-cannes-tote.jpg","/images/gallery/fluent-blend.jpg","/images/gallery/1inch-merch.jpg",
-                    ];
-                    const idx = allImgs.indexOf(lightboxImg);
-                    if (info.offset.x < -80 && idx < allImgs.length - 1) setLightboxImg(allImgs[idx + 1]);
-                    if (info.offset.x > 80 && idx > 0) setLightboxImg(allImgs[idx - 1]);
-                  }}
                 >
                   <img src={lightboxImg} alt="Gallery" className="w-full h-auto max-h-[85vh] object-contain rounded-lg select-none" draggable={false} />
-                  <p className="text-center text-white/30 text-xs mt-2">Swipe left / right to browse · Tap outside to close</p>
                 </motion.div>
               </motion.div>
             )}
@@ -1070,7 +1053,7 @@ export default function Home() {
 
           {/* Gallery Masonry Grid - balanced 4 columns desktop, 2 columns mobile */}
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2">
-            {/* Column 1 — 7 items */}
+            {/* Column 1 — 6 items (removed eigencloud, moved to col3) */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/ethindia-flatlay.png", alt: "ETHIndia branded merch flat-lay" },
@@ -1079,7 +1062,6 @@ export default function Home() {
                 { src: "/images/gallery/fhe-summit.jpg", alt: "FHE Summit branded t-shirts" },
                 { src: "/images/gallery/ethindia-tote-bag.jpg", alt: "ETHIndia illustrated tote bag" },
                 { src: "/images/gallery/socket-box.jpg", alt: "Socket branded merch gift box" },
-                { src: "/images/gallery/eigencloud-sunglasses.jpg", alt: "EigenCloud branded sunglasses" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1088,7 +1070,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 2 — 8 items */}
+            {/* Column 2 — 9 items (added ethglobal-cannes-tote + arbitrum-event from col4) */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/event-capes.png", alt: "Branded capes at conference" },
@@ -1098,7 +1080,8 @@ export default function Home() {
                 { src: "/images/gallery/multipli-set.png", alt: "Multipli branded black merch set" },
                 { src: "/images/gallery/og-socks-ethglobal.jpg", alt: "OG branded socks at ETHGlobal" },
                 { src: "/images/gallery/aethir-merch.jpg", alt: "Aethir branded t-shirts and stickers" },
-                { src: "/images/gallery/fluent-blend.jpg", alt: "Fluent and Blend branded t-shirts" },
+                { src: "/images/gallery/ethglobal-cannes-tote.jpg", alt: "ETHGlobal Cannes illustrated tote bag" },
+                { src: "/images/gallery/arbitrum-event.jpg", alt: "Arbitrum Open House event" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.03 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1107,7 +1090,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 3 — 8 items */}
+            {/* Column 3 — 9 items (added eigencloud from col1 + fluent-blend from col4) */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/gpu-rich-tees.jpg", alt: "GPU Rich branded t-shirts" },
@@ -1117,7 +1100,8 @@ export default function Home() {
                 { src: "/images/gallery/talus-box.jpg", alt: "Talus branded merch gift box" },
                 { src: "/images/gallery/biconomy-tshirt-varanasi.jpg", alt: "Biconomy t-shirt at Varanasi ghats" },
                 { src: "/images/gallery/ethglobal-swag-bag.jpg", alt: "ETHGlobal New Delhi swag bag" },
-                { src: "/images/gallery/1inch-merch.jpg", alt: "1inch branded merch set flat-lay" },
+                { src: "/images/gallery/eigencloud-sunglasses.jpg", alt: "EigenCloud branded sunglasses" },
+                { src: "/images/gallery/fluent-blend.jpg", alt: "Fluent and Blend branded t-shirts" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.02 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
@@ -1126,7 +1110,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Column 4 — 8 items */}
+            {/* Column 4 — 7 items (moved last 2 to col2) */}
             <div className="flex flex-col gap-2">
               {[
                 { src: "/images/gallery/notlikesus-hoodie.jpg", alt: "Not Like Sus custom hoodie back print" },
@@ -1135,8 +1119,7 @@ export default function Home() {
                 { src: "/images/gallery/openhouse-merch.png", alt: "Open House Arbitrum merch" },
                 { src: "/images/gallery/devcon-leather-wallet.jpg", alt: "Devcon leather wallet and accessories" },
                 { src: "/images/gallery/akave-socks.png", alt: "AKAVE branded socks" },
-                { src: "/images/gallery/ethglobal-cannes-tote.jpg", alt: "ETHGlobal Cannes illustrated tote bag" },
-                { src: "/images/gallery/arbitrum-event.jpg", alt: "Arbitrum Open House event" },
+                { src: "/images/gallery/1inch-merch.jpg", alt: "1inch branded merch set flat-lay" },
               ].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.05 }}
                   className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
