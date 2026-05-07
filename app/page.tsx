@@ -26,6 +26,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
   const [selectedCategory, setSelectedCategory] = useState<{ name: string; img: string; cols?: number; rows?: number; items?: string[] } | null>(null)
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -193,6 +194,11 @@ export default function Home() {
                   >
                     <a
                       href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(item.id);
+                        if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+                      }}
                       className={`text-xs font-medium transition-colors ${
                         activeSection === item.id ? "text-[#BFF000]" : "text-white hover:text-[#BFF000]"
                       }`}
@@ -266,7 +272,7 @@ export default function Home() {
                   >
                     <a
                       href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); const el = document.getElementById(item.id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }}
                       className={`text-xl font-medium transition-colors ${
                         activeSection === item.id ? "text-[#BFF000]" : "text-white hover:text-[#BFF000]"
                       }`}
@@ -402,17 +408,13 @@ export default function Home() {
                   className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 >
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button asChild className="rounded-full bg-[#BFF000] hover:bg-[#d4ff00] text-black px-8 py-6 text-lg font-bold">
-                      <a href="#contact-form">
-                        Get a Quote
-                      </a>
+                    <Button className="rounded-full bg-[#BFF000] hover:bg-[#d4ff00] text-black px-8 py-6 text-lg font-bold" onClick={() => { const el = document.getElementById('contact-form'); if(el){ window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); } }}>
+                      Get a Quote
                     </Button>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button asChild className="rounded-full bg-transparent border border-white/30 hover:border-[#BFF000] text-white px-8 py-6 text-lg font-bold">
-                      <a href="#gallery">
-                        See Our Work
-                      </a>
+                    <Button className="rounded-full bg-transparent border border-white/30 hover:border-[#BFF000] text-white px-8 py-6 text-lg font-bold" onClick={() => { const el = document.getElementById('gallery'); if(el){ window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); } }}>
+                      See Our Work
                     </Button>
                   </motion.div>
                 </motion.div>
@@ -733,11 +735,11 @@ export default function Home() {
                       <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${
                         step.isStart || step.isEnd
                           ? 'bg-[#BFF000] text-black border-[#BFF000] shadow-lg shadow-[#BFF000]/30' 
-                          : 'bg-transparent text-[#BFF000] border-[#BFF000]/50 group-hover:bg-[#BFF000]/10 group-hover:border-[#BFF000]'
+                          : 'bg-transparent text-white border-white/50 group-hover:text-[#BFF000] group-hover:border-[#BFF000] group-hover:bg-[#BFF000]/10'
                       }`}>
                         {step.icon}
                       </div>
-                      <span className={`mt-2 text-[10px] lg:text-xs font-medium transition-colors ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white/80 group-hover:text-[#BFF000]'}`}>
+                      <span className={`mt-2 text-[10px] lg:text-xs font-medium transition-colors ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white group-hover:text-[#BFF000]'}`}>
                         {step.label}
                       </span>
                     </div>
@@ -762,45 +764,58 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Mobile Flowchart - Horizontal Scroll */}
-            <div className="md:hidden">
-              <div className="flex items-center gap-4 overflow-x-auto pb-4 px-2 scrollbar-hide">
-                {[
-                  { icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", label: "Discovery", isStart: true },
-                  { icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", label: "Brief" },
-                  { icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Mockup" },
-                  { icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01", label: "Production" },
-                  { icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", label: "QC & Pack" },
-                  { icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4", label: "Shipping" },
-                  { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Delivery", isEnd: true },
-                ].map((step, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="flex items-center flex-shrink-0"
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className={`w-11 h-11 rounded-full flex items-center justify-center border-2 ${
-                        step.isStart || step.isEnd
-                          ? 'bg-[#BFF000] text-black border-[#BFF000]'
-                          : 'bg-transparent text-[#BFF000] border-[#BFF000]/50'
-                      }`}>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
-                        </svg>
-                      </div>
-                      <span className={`mt-1.5 text-[10px] font-medium ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white/70'}`}>
-                        {step.label}
-                      </span>
+            {/* Mobile Flowchart - Reverse S layout */}
+            <div className="md:hidden px-2">
+              {[
+                { icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", label: "Discovery", isStart: true },
+                { icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", label: "Brief" },
+                { icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Mockup" },
+                { icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01", label: "Production" },
+                { icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", label: "QC & Pack" },
+                { icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4", label: "Shipping" },
+                { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Delivery", isEnd: true },
+              ].reduce((rows: any[][], step, i) => {
+                const rowIndex = Math.floor(i / 3);
+                if (!rows[rowIndex]) rows[rowIndex] = [];
+                rows[rowIndex].push({ ...step, originalIndex: i });
+                return rows;
+              }, []).map((row, rowIndex) => {
+                const isEven = rowIndex % 2 === 0;
+                const displayRow = isEven ? row : [...row].reverse();
+                return (
+                  <div key={rowIndex}>
+                    <div className="flex items-center justify-between">
+                      {displayRow.map((step: any, colIndex: number) => (
+                        <div key={colIndex} className="flex items-center">
+                          <div className="flex flex-col items-center">
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                              step.isStart || step.isEnd
+                                ? 'bg-[#BFF000] text-black border-[#BFF000]'
+                                : 'bg-transparent text-white border-white/50'
+                            }`}>
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={step.icon} />
+                              </svg>
+                            </div>
+                            <span className={`mt-1.5 text-[10px] font-medium ${step.isStart || step.isEnd ? 'text-[#BFF000]' : 'text-white'}`}>
+                              {step.label}
+                            </span>
+                          </div>
+                          {colIndex < displayRow.length - 1 && (
+                            <div className="w-8 h-px bg-[#BFF000]/40 mx-1 flex-shrink-0" />
+                          )}
+                        </div>
+                      ))}
                     </div>
-                    {index < 6 && <div className="w-6 h-px bg-[#BFF000]/40 mx-1 flex-shrink-0" />}
-                  </motion.div>
-                ))}
-              </div>
-              <p className="text-center text-[10px] text-gray-500 mt-3">
+                    {rowIndex < 1 && (
+                      <div className={`flex ${isEven ? 'justify-end' : 'justify-start'} my-1`}>
+                        <div className="w-px h-6 bg-[#BFF000]/40" />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              <p className="text-center text-[10px] text-gray-500 mt-4">
                 <span className="text-[#BFF000]">*</span> Samples on request
               </p>
             </div>
@@ -981,6 +996,11 @@ export default function Home() {
               </motion.div>
             )}
           </AnimatePresence>
+          <div className="text-center mt-8">
+            <span className="text-xs text-gray-500">
+              <span className="text-[#BFF000]">*</span> DM for IRL catalogs
+            </span>
+          </div>
         </div>
       </section>
 
@@ -1004,7 +1024,7 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl md:text-5xl font-bold mb-4"
+              className="text-3xl md:text-5xl font-bold mb-4 text-white"
             >
               Gallery
             </motion.h2>
@@ -1019,6 +1039,30 @@ export default function Home() {
             </motion.p>
           </motion.div>
 
+          {/* Gallery Lightbox */}
+          <AnimatePresence>
+            {lightboxImg && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+                onClick={() => setLightboxImg(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0.8 }}
+                  className="relative max-w-4xl max-h-[90vh] w-full"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img src={lightboxImg} alt="Gallery" className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
+                  <button onClick={() => setLightboxImg(null)} className="absolute top-3 right-3 w-9 h-9 bg-black/60 rounded-full flex items-center justify-center text-white hover:text-[#BFF000] transition-colors text-xl">✕</button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Gallery Masonry Grid - 18 unique images, no repeats, full images shown */}
           {/* Column 1: images that flow well together (portrait-heavy) */}
           {/* Column 2: mixed landscape/square */}
@@ -1028,88 +1072,88 @@ export default function Home() {
             {/* Column 1 */}
             <div className="flex flex-col gap-2">
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/ethindia-flatlay.png" alt="ETHIndia branded merch flat-lay" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/ethindia-flatlay.png")}>
+                <img src="/images/gallery/ethindia-flatlay.png" alt="ETHIndia branded merch flat-lay" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.04 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/debridge-hoodie.jpg" alt="deBridge branded yellow hoodie" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/debridge-hoodie.jpg")}>
+                <img src="/images/gallery/debridge-hoodie.jpg" alt="deBridge branded yellow hoodie" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.08 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/fhe-summit.jpg" alt="FHE Summit branded t-shirts at conference" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/fhe-summit.jpg")}>
+                <img src="/images/gallery/fhe-summit.jpg" alt="FHE Summit branded t-shirts at conference" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.12 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/socket-box.jpg" alt="Socket branded merch gift box" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/socket-box.jpg")}>
+                <img src="/images/gallery/socket-box.jpg" alt="Socket branded merch gift box" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
             </div>
 
             {/* Column 2 */}
             <div className="flex flex-col gap-2">
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.03 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/event-capes.png" alt="Branded capes at conference" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/event-capes.png")}>
+                <img src="/images/gallery/event-capes.png" alt="Branded capes at conference" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.07 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/story-merch.jpg" alt="Story Protocol branded merch" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/story-merch.jpg")}>
+                <img src="/images/gallery/story-merch.jpg" alt="Story Protocol branded merch" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.11 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/multipli-set.png" alt="Multipli branded black merch set" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/multipli-set.png")}>
+                <img src="/images/gallery/multipli-set.png" alt="Multipli branded black merch set" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.15 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/aethir-merch.jpg" alt="Aethir branded t-shirts and stickers" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/aethir-merch.jpg")}>
+                <img src="/images/gallery/aethir-merch.jpg" alt="Aethir branded t-shirts and stickers" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
             </div>
 
             {/* Column 3 */}
             <div className="flex flex-col gap-2">
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.02 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/gpu-rich-tees.jpg" alt="GPU Rich branded t-shirts" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/gpu-rich-tees.jpg")}>
+                <img src="/images/gallery/gpu-rich-tees.jpg" alt="GPU Rich branded t-shirts" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.06 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/chain-abstraction-mafia.jpg" alt="Chain Abstraction Mafia team t-shirts" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/chain-abstraction-mafia.jpg")}>
+                <img src="/images/gallery/chain-abstraction-mafia.jpg" alt="Chain Abstraction Mafia team t-shirts" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/talus-box.jpg" alt="Talus branded merch gift box" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/talus-box.jpg")}>
+                <img src="/images/gallery/talus-box.jpg" alt="Talus branded merch gift box" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.14 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/ethglobal-swag-bag.jpg" alt="ETHGlobal New Delhi swag bag contents" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/ethglobal-swag-bag.jpg")}>
+                <img src="/images/gallery/ethglobal-swag-bag.jpg" alt="ETHGlobal New Delhi swag bag contents" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.18 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/arbitrum-event.jpg" alt="Arbitrum Open House hackathon event" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/arbitrum-event.jpg")}>
+                <img src="/images/gallery/arbitrum-event.jpg" alt="Arbitrum Open House hackathon event" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
             </div>
 
             {/* Column 4 */}
             <div className="flex flex-col gap-2">
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.05 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/copperx-cap.jpg" alt="Copperx branded visor cap" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/copperx-cap.jpg")}>
+                <img src="/images/gallery/copperx-cap.jpg" alt="Copperx branded visor cap" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.09 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/openhouse-merch.png" alt="Open House Arbitrum merch" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/openhouse-merch.png")}>
+                <img src="/images/gallery/openhouse-merch.png" alt="Open House Arbitrum merch" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.13 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/akave-socks.png" alt="AKAVE branded socks" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/akave-socks.png")}>
+                <img src="/images/gallery/akave-socks.png" alt="AKAVE branded socks" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.17 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/fluent-blend.jpg" alt="Fluent and Blend branded t-shirts display" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/fluent-blend.jpg")}>
+                <img src="/images/gallery/fluent-blend.jpg" alt="Fluent and Blend branded t-shirts display" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.21 }}
-                className="overflow-hidden rounded-lg border border-white/10">
-                <img src="/images/gallery/1inch-merch.jpg" alt="1inch branded merch set flat-lay" className="w-full h-auto block" />
+                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/1inch-merch.jpg")}>
+                <img src="/images/gallery/1inch-merch.jpg" alt="1inch branded merch set flat-lay" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
               </motion.div>
             </div>
           </div>
@@ -1117,7 +1161,7 @@ export default function Home() {
       </section>
 
       {/* Client Logos Section */}
-      <section id="clients" className="min-h-screen bg-black relative flex items-center justify-center py-20">
+      <section id="clients" className="min-h-screen bg-black relative flex items-center justify-center pt-24 pb-20 scroll-mt-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -1142,7 +1186,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-[#BFF000]"
             >
-              Trusted by 80+ leading Web3 companies and organizations worldwide
+              Trusted by 100+ leading Web3 companies and organizations worldwide
             </motion.p>
           </motion.div>
 
@@ -1160,7 +1204,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="reviews" className="min-h-screen bg-black relative flex items-center justify-center py-20">
+      <section id="reviews" className="min-h-screen bg-black relative flex items-center justify-center pt-24 pb-20 scroll-mt-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -1369,10 +1413,20 @@ export default function Home() {
                     value={`item-${index + 1}`}
                     className="border-white/10 rounded-lg overflow-hidden"
                   >
-                    <AccordionTrigger className="px-4 py-3 bg-white/5 hover:bg-white/10 text-left font-medium text-sm text-white">
+                    <AccordionTrigger className="px-4 py-3 bg-white/5 hover:bg-white/10 text-left font-medium text-sm text-white hover:text-[#BFF000] transition-colors [&[data-state=open]]:text-[#BFF000]">
                       {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className="px-4 py-3 text-gray-400 text-sm">{item.answer}</AccordionContent>
+                    <AccordionContent className="px-4 py-3 text-gray-400 text-sm">
+                      {item.answer.includes('@siddyb26') ? (
+                        <>
+                          Fill out the contact form below or reach us on Telegram ({' '}
+                          <a href="https://t.me/siddyb26" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#BFF000] transition-colors">@siddyb26</a>
+                          {' '}or{' '}
+                          <a href="https://t.me/aoife05" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#BFF000] transition-colors">@aoife05</a>
+                          ). Share your brief — what you need, quantities, timeline, and any design references — and we'll respond within 24 hours with a quote.
+                        </>
+                      ) : item.answer}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -1405,7 +1459,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-lg text-gray-400 mb-8 max-w-lg"
+                  className="text-lg text-[#BFF000] mb-8 max-w-lg"
                 >
                   Got a wild idea brewing? Ready to turn your brand into the talk of every Web3 event? Hit us up and
                   let's make some magic happen! ✨
@@ -1543,7 +1597,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8"
             >
-              <h3 className="text-2xl font-bold text-white mb-6">Drop us a message</h3>
+              <h3 className="text-2xl font-bold text-[#BFF000] mb-6">Drop us a message</h3>
 
               {/* Success/Error Messages */}
               <AnimatePresence>
@@ -1630,55 +1684,6 @@ export default function Home() {
                       placeholder="Your company name"
                       className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#BFF000] focus:border-transparent transition-all"
                     />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                      WhatsApp
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="Enter your WhatsApp number"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#BFF000] focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="projectType" className="block text-sm font-medium text-white/80 mb-2">
-                      Project Type
-                    </label>
-                    <select
-                      id="projectType"
-                      name="projectType"
-                      value={projectType}
-                      onChange={(e) => setProjectType(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BFF000] focus:border-transparent transition-all appearance-none cursor-pointer"
-                      style={{
-                        color: projectType === "" ? "rgba(255, 255, 255, 0.5)" : "white",
-                      }}
-                    >
-                      <option value="" disabled style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-                        Select project type
-                      </option>
-                      <option value="conference" style={{ color: "white", backgroundColor: "#1a1a1a" }}>
-                        Conference Merchandise
-                      </option>
-                      <option value="corporate" style={{ color: "white", backgroundColor: "#1a1a1a" }}>
-                        Corporate Branding
-                      </option>
-                      <option value="event" style={{ color: "white", backgroundColor: "#1a1a1a" }}>
-                        Event Merchandise
-                      </option>
-                      <option value="startup" style={{ color: "white", backgroundColor: "#1a1a1a" }}>
-                        Startup Package
-                      </option>
-                      <option value="custom" style={{ color: "white", backgroundColor: "#1a1a1a" }}>
-                        Custom Project
-                      </option>
-                    </select>
                   </div>
                 </div>
 
@@ -1780,12 +1785,14 @@ export default function Home() {
                 </li>
                 <li>
                   <a href="https://t.me/siddyb26" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
-                    <span className="text-[#BFF000]">✈</span> @siddyb26
+                    <svg className="w-3.5 h-3.5 text-[#BFF000] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
+                    @siddyb26 <span className="text-gray-600 text-xs">(Founder)</span>
                   </a>
                 </li>
                 <li>
                   <a href="https://t.me/aoife05" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
-                    <span className="text-[#BFF000]">✈</span> @aoife05
+                    <svg className="w-3.5 h-3.5 text-[#BFF000] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
+                    @aoife05 <span className="text-gray-600 text-xs">(Co-founder)</span>
                   </a>
                 </li>
                 <li>
