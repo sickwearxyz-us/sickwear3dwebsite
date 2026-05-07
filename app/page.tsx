@@ -1174,7 +1174,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.5, type: "spring", bounce: 0.4 }}
               className="text-white/90 font-medium mt-2"
             >
-              — ETHGlobal Team
+              — Most Web3 Teams
             </motion.p>
           </div>
         </div>
@@ -1219,7 +1219,7 @@ export default function Home() {
               },
               {
                 quote: "Shared these with the design team, they were pleased with the stitch work.",
-                author: "Liza",
+                author: "Lisa",
                 company: "The Graph",
               },
               {
@@ -1230,12 +1230,12 @@ export default function Home() {
               {
                 quote: "Epic work! Thanks for all the hard work with the swag, really appreciate it!",
                 author: "Calvin",
-                company: "Ethereum Foundation",
+                company: "EthGlobal",
               },
               {
                 quote: "I am in love with the backdrop, it's so bright! Thank you so much for your help and great work on the matter.",
-                author: "Lisa",
-                company: "ETHGlobal",
+                author: "Liza",
+                company: "1 Inch",
               },
               {
                 quote: "Hey yes, I've received it and I am actually wearing one of them right now. The print and the t-shirt quality is fabulous.",
@@ -1243,7 +1243,7 @@ export default function Home() {
                 company: "Superteam",
               },
               {
-                quote: "Hey guys, the merch is amazing!! Super high quality!",
+                quote: "Hey guys, the merch is amazing!! Super high quality! Thanks for the fastest turnaround we have seen",
                 author: "Jonnie",
                 company: "deBridge",
               },
