@@ -1142,7 +1142,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-[#BFF000]"
             >
-              Trusted by 100+ leading Web3 companies and organizations worldwide
+              Trusted by 80+ leading Web3 companies and organizations worldwide
             </motion.p>
           </motion.div>
 
@@ -1156,7 +1156,6 @@ export default function Home() {
             <ClientLogosBanner />
           </motion.div>
 
-          </div>
         </div>
       </section>
 
