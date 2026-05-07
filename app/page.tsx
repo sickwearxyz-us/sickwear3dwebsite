@@ -78,7 +78,7 @@ export default function Home() {
     { name: "Clients", href: "#clients", id: "clients" },
     { name: "Testimonial", href: "#reviews", id: "reviews" },
     { name: "FAQ", href: "#faq", id: "faq" },
-    { name: "Contact", href: "#contact-form", id: "contact-form" },
+    { name: "Contact", href: "#contact-form", id: "contact-form", scrollTo: "contact-form" },
   ]
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -1140,7 +1140,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-400"
+              className="text-lg md:text-xl text-[#BFF000]"
             >
               Trusted by 100+ leading Web3 companies and organizations worldwide
             </motion.p>
@@ -1156,26 +1156,6 @@ export default function Home() {
             <ClientLogosBanner />
           </motion.div>
 
-          <div className="text-center">
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-gray-400 italic"
-            >
-              "Sickwear has been our go-to merchandise partner for all our global events. Their quality and attention to
-              detail is unmatched."
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5, type: "spring", bounce: 0.4 }}
-              className="text-white/90 font-medium mt-2"
-            >
-              — Most Web3 Teams
-            </motion.p>
           </div>
         </div>
       </section>
@@ -1195,7 +1175,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-              className="text-4xl md:text-6xl font-bold mb-6"
+              className="text-4xl md:text-6xl font-bold mb-6 text-white"
             >
               Testimonials
             </motion.h2>
@@ -1204,7 +1184,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-400"
+              className="text-lg md:text-xl text-[#BFF000]"
             >
               What our clients say about us
             </motion.p>
@@ -1219,7 +1199,7 @@ export default function Home() {
               },
               {
                 quote: "Shared these with the design team, they were pleased with the stitch work.",
-                author: "Lisa",
+                author: "Liza",
                 company: "The Graph",
               },
               {
@@ -1230,12 +1210,12 @@ export default function Home() {
               {
                 quote: "Epic work! Thanks for all the hard work with the swag, really appreciate it!",
                 author: "Calvin",
-                company: "EthGlobal",
+                company: "Ethereum Foundation",
               },
               {
                 quote: "I am in love with the backdrop, it's so bright! Thank you so much for your help and great work on the matter.",
-                author: "Liza",
-                company: "1 Inch",
+                author: "Lisa",
+                company: "ETHGlobal",
               },
               {
                 quote: "Hey yes, I've received it and I am actually wearing one of them right now. The print and the t-shirt quality is fabulous.",
@@ -1243,7 +1223,7 @@ export default function Home() {
                 company: "Superteam",
               },
               {
-                quote: "Hey guys, the merch is amazing!! Super high quality! Thanks for the fastest turnaround we have seen",
+                quote: "Hey guys, the merch is amazing!! Super high quality!",
                 author: "Jonnie",
                 company: "deBridge",
               },
@@ -1322,14 +1302,14 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="text-3xl md:text-5xl font-bold mb-4 text-white"
               >
-                Pro Questions
+                FAQ
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg text-gray-400"
+                className="text-lg text-[#BFF000]"
               >
                 Answers to frequently asked questions
               </motion.p>
@@ -1382,7 +1362,7 @@ export default function Home() {
                   {
                     question: "How do I get started?",
                     answer:
-                      "Fill out the contact form below or reach us on Telegram (@siddyb26). Share your brief — what you need, quantities, timeline, and any design references — and we'll respond within 24 hours with a quote.",
+                      "Fill out the contact form below or reach us on Telegram (@siddyb26 or @aoife05). Share your brief — what you need, quantities, timeline, and any design references — and we'll respond within 24 hours with a quote.",
                   },
                 ].map((item, index) => (
                   <AccordionItem
@@ -1399,53 +1379,6 @@ export default function Home() {
               </Accordion>
             </motion.div>
           </div>
-
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-32"
-          >
-            <div className="text-center">
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-3xl md:text-5xl font-bold mb-4 text-white"
-              >
-                Ready to Get Sick?
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg text-gray-400 mb-6 max-w-2xl mx-auto"
-              >
-                Join 80+ global companies who trust Sickwear for their Web3 merchandise needs.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  asChild
-                  className="rounded-full bg-[#BFF000] hover:bg-[#BFF000]/90 text-black font-semibold py-4 px-6 rounded-lg transition-all duration-200"
-                >
-                  <a href="#contact-form">
-                    Let's get you Sick
-                  </a>
-                </Button>
-              </motion.div>
-            </div>
-          </motion.div>
 
           {/* Contact Section */}
           <motion.div
@@ -1486,8 +1419,9 @@ export default function Home() {
                   {
                     icon: "telegram",
                     title: "Telegram",
-                    contact: "@siddyb26",
+                    contact: "@siddyb26 · @aoife05",
                     href: "https://t.me/siddyb26",
+                    href2: "https://t.me/aoife05",
                   },
                   {
                     icon: "email",
@@ -1544,14 +1478,15 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-[#BFF000] transition-colors"
-                      >
-                        {item.contact}
-                      </a>
+                      {item.href2 ? (
+                        <div className="flex gap-3">
+                          <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#BFF000] transition-colors">@siddyb26</a>
+                          <span className="text-gray-600">·</span>
+                          <a href={item.href2} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#BFF000] transition-colors">@aoife05</a>
+                        </div>
+                      ) : (
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#BFF000] transition-colors">{item.contact}</a>
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -1847,6 +1782,11 @@ export default function Home() {
                 <li>
                   <a href="https://t.me/siddyb26" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
                     <span className="text-[#BFF000]">✈</span> @siddyb26
+                  </a>
+                </li>
+                <li>
+                  <a href="https://t.me/aoife05" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
+                    <span className="text-[#BFF000]">✈</span> @aoife05
                   </a>
                 </li>
                 <li>
