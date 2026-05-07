@@ -1142,7 +1142,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-gray-400"
             >
-              Trusted by 80+ leading Web3 companies and organizations worldwide
+              Trusted by 100+ leading Web3 companies and organizations worldwide
             </motion.p>
           </motion.div>
 
