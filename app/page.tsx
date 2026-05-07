@@ -1063,98 +1063,81 @@ export default function Home() {
             )}
           </AnimatePresence>
 
-          {/* Gallery Masonry Grid - 18 unique images, no repeats, full images shown */}
-          {/* Column 1: images that flow well together (portrait-heavy) */}
-          {/* Column 2: mixed landscape/square */}
-          {/* Column 3: landscape-heavy */}
-          {/* Column 4: portrait + square mix */}
+          {/* Gallery Masonry Grid - balanced 4 columns */}
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2">
             {/* Column 1 */}
             <div className="flex flex-col gap-2">
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/ethindia-flatlay.png")}>
-                <img src="/images/gallery/ethindia-flatlay.png" alt="ETHIndia branded merch flat-lay" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.04 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/debridge-hoodie.jpg")}>
-                <img src="/images/gallery/debridge-hoodie.jpg" alt="deBridge branded yellow hoodie" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.08 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/fhe-summit.jpg")}>
-                <img src="/images/gallery/fhe-summit.jpg" alt="FHE Summit branded t-shirts at conference" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.12 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/socket-box.jpg")}>
-                <img src="/images/gallery/socket-box.jpg" alt="Socket branded merch gift box" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
+              {[
+                { src: "/images/gallery/ethindia-flatlay.png", alt: "ETHIndia branded merch flat-lay" },
+                { src: "/images/gallery/debridge-hoodie.jpg", alt: "deBridge branded yellow hoodie" },
+                { src: "/images/gallery/wave-kimono.jpg", alt: "Custom wave print kimono at event" },
+                { src: "/images/gallery/fhe-summit.jpg", alt: "FHE Summit branded t-shirts" },
+                { src: "/images/gallery/ethindia-tote-bag.jpg", alt: "ETHIndia illustrated tote bag" },
+                { src: "/images/gallery/socket-box.jpg", alt: "Socket branded merch gift box" },
+                { src: "/images/gallery/eigencloud-sunglasses.jpg", alt: "EigenCloud branded sunglasses at Vibecon" },
+              ].map((img, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}
+                  className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                </motion.div>
+              ))}
             </div>
 
             {/* Column 2 */}
             <div className="flex flex-col gap-2">
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.03 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/event-capes.png")}>
-                <img src="/images/gallery/event-capes.png" alt="Branded capes at conference" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.07 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/story-merch.jpg")}>
-                <img src="/images/gallery/story-merch.jpg" alt="Story Protocol branded merch" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.11 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/multipli-set.png")}>
-                <img src="/images/gallery/multipli-set.png" alt="Multipli branded black merch set" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.15 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/aethir-merch.jpg")}>
-                <img src="/images/gallery/aethir-merch.jpg" alt="Aethir branded t-shirts and stickers" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
+              {[
+                { src: "/images/gallery/event-capes.png", alt: "Branded capes at conference" },
+                { src: "/images/gallery/cdp-backpack-ethindia.jpg", alt: "CDP backpack and merch at ETHIndia" },
+                { src: "/images/gallery/story-merch.jpg", alt: "Story Protocol branded merch" },
+                { src: "/images/gallery/ethmumbai-tote.jpg", alt: "ETHMumbai branded red tote bag" },
+                { src: "/images/gallery/multipli-set.png", alt: "Multipli branded black merch set" },
+                { src: "/images/gallery/og-socks-ethglobal.jpg", alt: "OG branded socks at ETHGlobal" },
+                { src: "/images/gallery/aethir-merch.jpg", alt: "Aethir branded t-shirts and stickers" },
+              ].map((img, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.03 }}
+                  className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                </motion.div>
+              ))}
             </div>
 
             {/* Column 3 */}
             <div className="flex flex-col gap-2">
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.02 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/gpu-rich-tees.jpg")}>
-                <img src="/images/gallery/gpu-rich-tees.jpg" alt="GPU Rich branded t-shirts" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.06 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/chain-abstraction-mafia.jpg")}>
-                <img src="/images/gallery/chain-abstraction-mafia.jpg" alt="Chain Abstraction Mafia team t-shirts" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/talus-box.jpg")}>
-                <img src="/images/gallery/talus-box.jpg" alt="Talus branded merch gift box" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.14 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/ethglobal-swag-bag.jpg")}>
-                <img src="/images/gallery/ethglobal-swag-bag.jpg" alt="ETHGlobal New Delhi swag bag contents" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.18 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/arbitrum-event.jpg")}>
-                <img src="/images/gallery/arbitrum-event.jpg" alt="Arbitrum Open House hackathon event" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
+              {[
+                { src: "/images/gallery/gpu-rich-tees.jpg", alt: "GPU Rich branded t-shirts" },
+                { src: "/images/gallery/katerina-leather-set.jpg", alt: "Custom leather accessories gift set" },
+                { src: "/images/gallery/chain-abstraction-mafia.jpg", alt: "Chain Abstraction Mafia team t-shirts" },
+                { src: "/images/gallery/altlayer-tshirts.jpg", alt: "AltLayer branded t-shirts display" },
+                { src: "/images/gallery/talus-box.jpg", alt: "Talus branded merch gift box" },
+                { src: "/images/gallery/biconomy-tshirt-varanasi.jpg", alt: "Biconomy branded t-shirt at Varanasi ghats" },
+                { src: "/images/gallery/ethglobal-swag-bag.jpg", alt: "ETHGlobal New Delhi swag bag" },
+                { src: "/images/gallery/arbitrum-event.jpg", alt: "Arbitrum Open House event" },
+              ].map((img, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.02 }}
+                  className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                </motion.div>
+              ))}
             </div>
 
             {/* Column 4 */}
             <div className="flex flex-col gap-2">
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.05 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/copperx-cap.jpg")}>
-                <img src="/images/gallery/copperx-cap.jpg" alt="Copperx branded visor cap" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.09 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/openhouse-merch.png")}>
-                <img src="/images/gallery/openhouse-merch.png" alt="Open House Arbitrum merch" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.13 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/akave-socks.png")}>
-                <img src="/images/gallery/akave-socks.png" alt="AKAVE branded socks" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.17 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/fluent-blend.jpg")}>
-                <img src="/images/gallery/fluent-blend.jpg" alt="Fluent and Blend branded t-shirts display" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.21 }}
-                className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg("/images/gallery/1inch-merch.jpg")}>
-                <img src="/images/gallery/1inch-merch.jpg" alt="1inch branded merch set flat-lay" className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
-              </motion.div>
+              {[
+                { src: "/images/gallery/notlikesus-hoodie.jpg", alt: "Not Like Sus custom hoodie back print" },
+                { src: "/images/gallery/copperx-cap.jpg", alt: "Copperx branded visor cap" },
+                { src: "/images/gallery/fluent-merch-table.jpg", alt: "Fluent merch table at event" },
+                { src: "/images/gallery/openhouse-merch.png", alt: "Open House Arbitrum merch" },
+                { src: "/images/gallery/devcon-leather-wallet.jpg", alt: "Devcon leather wallet and accessories" },
+                { src: "/images/gallery/akave-socks.png", alt: "AKAVE branded socks" },
+                { src: "/images/gallery/ethglobal-cannes-tote.jpg", alt: "ETHGlobal Cannes illustrated tote bag" },
+                { src: "/images/gallery/fluent-blend.jpg", alt: "Fluent and Blend branded t-shirts" },
+                { src: "/images/gallery/1inch-merch.jpg", alt: "1inch branded merch set flat-lay" },
+              ].map((img, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 + 0.05 }}
+                  className="overflow-hidden rounded-lg border border-white/10 cursor-pointer hover:border-[#BFF000]/50 transition-all" onClick={() => setLightboxImg(img.src)}>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
