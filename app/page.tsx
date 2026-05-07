@@ -403,8 +403,15 @@ export default function Home() {
                 >
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button asChild className="rounded-full bg-[#BFF000] hover:bg-[#d4ff00] text-black px-8 py-6 text-lg font-bold">
-                      <a href="https://t.me/aoife05" target="_blank" rel="noopener noreferrer">
-                        Get Started
+                      <a href="#contact-form">
+                        Get a Quote
+                      </a>
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button asChild className="rounded-full bg-transparent border border-white/30 hover:border-[#BFF000] text-white px-8 py-6 text-lg font-bold">
+                      <a href="#gallery">
+                        See Our Work
                       </a>
                     </Button>
                   </motion.div>
@@ -1206,20 +1213,49 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                quote: "Sickwear delivered exceptional quality merchandise for our conference. The attendees loved it!",
-                author: "Alex Chen",
-                company: "Devfolio",
+                quote: "The founders really liked the jacket quality.",
+                author: "Siddharth",
+                company: "Qiro",
               },
               {
-                quote: "The fastest turnaround time we've experienced. Perfect for our last-minute event needs.",
-                author: "Sarah Johnson",
+                quote: "Shared these with the design team, they were pleased with the stitch work.",
+                author: "Liza",
+                company: "The Graph",
+              },
+              {
+                quote: "Btw Team! The windcheaters are actually sick! Great Job! Getting you all some new clients for sure.",
+                author: "Aditi",
+                company: "Arbitrum",
+              },
+              {
+                quote: "Epic work! Thanks for all the hard work with the swag, really appreciate it!",
+                author: "Calvin",
+                company: "Ethereum Foundation",
+              },
+              {
+                quote: "I am in love with the backdrop, it's so bright! Thank you so much for your help and great work on the matter.",
+                author: "Lisa",
                 company: "ETHGlobal",
               },
               {
-                quote:
-                  "Their design team captured our brand essence perfectly. The merch became a talking point at our event.",
-                author: "Michael Rodriguez",
-                company: "Layer Zero",
+                quote: "Hey yes, I've received it and I am actually wearing one of them right now. The print and the t-shirt quality is fabulous.",
+                author: "Pratik",
+                company: "Superteam",
+              },
+              {
+                quote: "Hey guys, the merch is amazing!! Super high quality!",
+                author: "Jonnie",
+                company: "deBridge",
+              },
+              {
+                quote: "Thanks again for everything. It was wonderful getting to work with your team especially with the quick turnaround.",
+                author: "LFGAmy",
+                company: "EigenCloud",
+              },
+              {
+                quote: "Merch was great thanks!! Very Popular!",
+                author: "Aparna",
+                company: "AltLayer",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -1311,17 +1347,42 @@ export default function Home() {
                   {
                     question: "What is the minimum order quantity?",
                     answer:
-                      "Our minimum order quantity varies by product, but typically starts at 50 units for standard items. For custom designs or special materials, we may require a higher minimum. Contact us for specific product minimums.",
+                      "Our minimum order quantity is typically 50 units for standard items like t-shirts and hoodies. For accessories and specialty items, MOQ may vary. We also offer smaller runs for premium or limited-edition drops — reach out and we'll work with your budget.",
                   },
                   {
                     question: "How long does production take?",
                     answer:
-                      "Our standard production time is 2-3 weeks from design approval. We also offer expedited services for urgent needs, which can reduce production time to as little as 7-10 days for an additional fee.",
+                      "Standard production takes 2–3 weeks from design approval. We offer expedited production (7–10 days) for urgent event needs. For large orders (500+ units) we recommend 3–4 weeks to maintain quality. Rush timelines are available — contact us to discuss.",
                   },
                   {
                     question: "Do you ship internationally?",
                     answer:
-                      "Yes, we ship worldwide. International shipping costs and delivery times vary by destination. We work with reliable logistics partners to ensure your merchandise arrives safely and on time, regardless of location.",
+                      "Yes, we ship to 150+ countries worldwide. We've fulfilled orders for events in the US, Europe, Southeast Asia, and beyond. International shipping costs and timelines vary by destination — we'll provide a full quote upfront.",
+                  },
+                  {
+                    question: "Can I pay with crypto?",
+                    answer:
+                      "Absolutely — we accept USDC, USDT, ETH, and other major tokens. We're one of the few merch partners fully set up for crypto-native payments. Traditional wire transfer and card payments are also accepted.",
+                  },
+                  {
+                    question: "Do you provide design help?",
+                    answer:
+                      "Yes! Our in-house design team can work from your brand guidelines, logo files, or even a rough idea. We'll create mockups for approval before production begins. Design assistance is included for orders above a certain quantity — contact us for details.",
+                  },
+                  {
+                    question: "Can I get samples before the full order?",
+                    answer:
+                      "Yes, samples are available on request. We recommend ordering samples for large runs so you can approve the quality, fit, and print before we proceed. Sample costs are typically credited toward your final order.",
+                  },
+                  {
+                    question: "What kind of customisation is available?",
+                    answer:
+                      "Almost everything is customisable — fabric, colour, cut, print method (screen print, embroidery, DTG, sublimation), labels, tags, and packaging. We also offer NFC-enabled merch and RFID-protected bags for Web3-native experiences.",
+                  },
+                  {
+                    question: "How do I get started?",
+                    answer:
+                      "Fill out the contact form below or reach us on Telegram (@siddyb26). Share your brief — what you need, quantities, timeline, and any design references — and we'll respond within 24 hours with a quote.",
                   },
                 ].map((item, index) => (
                   <AccordionItem
@@ -1378,7 +1439,7 @@ export default function Home() {
                   asChild
                   className="rounded-full bg-[#BFF000] hover:bg-[#BFF000]/90 text-black font-semibold py-4 px-6 rounded-lg transition-all duration-200"
                 >
-                  <a href="https://t.me/aoife05" target="_blank" rel="noopener noreferrer">
+                  <a href="#contact-form">
                     Let's get you Sick
                   </a>
                 </Button>
@@ -1725,10 +1786,90 @@ export default function Home() {
 
       
 
-      {/* Copyright Footer */}
-      <div className="bg-black border-t border-white/10 py-6 text-center">
-        <p className="text-sm text-gray-500">{"©"} {new Date().getFullYear()} Sickwear. All rights reserved.</p>
-      </div>
+      {/* Full Footer */}
+      <footer className="bg-black border-t border-white/10">
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            {/* Brand */}
+            <div className="md:col-span-2">
+              <div className="text-2xl font-black mb-4">
+                <span className="text-white">SICK</span><span className="text-[#BFF000]">WEAR</span>
+              </div>
+              <p className="text-gray-400 text-sm max-w-xs leading-relaxed mb-6">
+                The #1 Web3 merchandise partner for global communities. Premium custom merch, made in India, shipped worldwide.
+              </p>
+              <div className="flex gap-3">
+                <a href="https://x.com/sickwear_xyz" target="_blank" rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#BFF000] hover:bg-[#BFF000]/10 transition-all">
+                  <svg className="w-4 h-4 text-[#BFF000]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                <a href="https://t.me/sickweareth" target="_blank" rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#BFF000] hover:bg-[#BFF000]/10 transition-all">
+                  <svg className="w-4 h-4 text-[#BFF000]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                {[
+                  { label: "Features", href: "#features" },
+                  { label: "Products", href: "#products" },
+                  { label: "Gallery", href: "#gallery" },
+                  { label: "Clients", href: "#clients" },
+                  { label: "FAQ", href: "#faq" },
+                  { label: "Contact", href: "#contact-form" },
+                ].map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h4>
+              <ul className="space-y-3">
+                <li>
+                  <a href="mailto:sickwear.xyz@gmail.com" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
+                    <span className="text-[#BFF000]">✉</span> sickwear.xyz@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <a href="https://t.me/siddyb26" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
+                    <span className="text-[#BFF000]">✈</span> @siddyb26
+                  </a>
+                </li>
+                <li>
+                  <a href="https://x.com/sickwear_xyz" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm hover:text-[#BFF000] transition-colors flex items-center gap-2">
+                    <span className="text-[#BFF000]">𝕏</span> @sickwear_xyz
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <span className="text-gray-500 text-xs">🇮🇳 Made in India · Shipped Worldwide</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-500">© {new Date().getFullYear()} Sickwear. All rights reserved.</p>
+            <div className="flex gap-6">
+              <a href="/brand" className="text-xs text-gray-500 hover:text-[#BFF000] transition-colors">Brand Guidelines</a>
+              <a href="/overview" className="text-xs text-gray-500 hover:text-[#BFF000] transition-colors">Overview</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
