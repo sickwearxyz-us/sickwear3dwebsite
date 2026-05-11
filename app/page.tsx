@@ -869,11 +869,11 @@ export default function Home() {
           {/* 3x3 Product Categories Grid */}
           <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
             {[
-              { name: "Apparels", img: "/images/products/apparels.jpg", cols: 3, rows: 3, items: ["Round Neck T-Shirt", "Polo T-Shirt", "Hoodie", "Puffer Jacket", "Kimono", "Shorts", "Jersey", "Oversized T-Shirt", "Joggers"] },
+              { name: "Apparel", img: "/images/products/apparels.jpg", cols: 3, rows: 3, items: ["Round Neck T-Shirt", "Polo T-Shirt", "Hoodie", "Puffer Jacket", "Kimono", "Shorts", "Jersey", "Oversized T-Shirt", "Joggers"] },
               { name: "Accessories", img: "/images/products/accessories.jpg", cols: 3, rows: 4, items: ["Baseball Cap", "Bucket Hat", "Beanie", "Sleep Mask", "Balaclava", "Neck Pillow", "Gloves", "Socks", "Scarf", "Bandana", "Sneakers", "Sliders"] },
               { name: "Bags & More", img: "/images/products/bags.jpg", cols: 3, rows: 3, items: ["Backpack", "Sling Bag", "Tote Bag", "Fanny Pack", "Laptop Bag", "", "Duffle Bag", "Laptop Cover", "Pouches"] },
               { name: "Leather Items", img: "/images/products/leather.jpg", cols: 3, rows: 2, items: ["Sunglass Case", "Wallet", "Leather Tray", "Passport Cover", "Coaster", "Luggage Tag"] },
-              { name: "Drinkwares", img: "/images/products/drinkwares.jpg", cols: 4, rows: 2, items: ["Ceramic Mug", "Cold Cup", "Steel Bottle", "Glass Tumbler", "Sipper", "Protein Shaker", "Stanley Cup", "Travel Mug"] },
+              { name: "Drinkware", img: "/images/products/drinkwares.jpg", cols: 4, rows: 2, items: ["Ceramic Mug", "Cold Cup", "Steel Bottle", "Glass Tumbler", "Sipper", "Protein Shaker", "Stanley Cup", "Travel Mug"] },
               { name: "Gadgets", img: "/images/products/gadgets.jpg", cols: 4, rows: 4, items: ["Humidifier", "Uni-Adapter", "Tripod", "Speaker", "Power Bank", "Aroma Diffuser", "Yo-Yo Cable", "Connectors", "Headphone", "LED Backpack", "Webcam", "Earbuds", "", "Portable Fan", "Table Lamp", ""] },
               { name: "Stationery", img: "/images/products/stationery.jpg", cols: 4, rows: 2, items: ["Diaries & Notebooks", "Pens & Pencils", "Bookmark", "Desk Mat", "Mobile Stand", "Table Clock", "Pen Stand", "Card Holder"] },
               { name: "Events & More", img: "/images/products/events.jpg", cols: 3, rows: 3, items: ["ID Cards", "Lanyards", "Wrist Bands", "Table Tops", "Backdrop", "LED Boxes", "Standees", "Banners", "Cards & Pamphlets"] },
