@@ -673,7 +673,7 @@ export default function GlobalMap() {
             {[
               { label: "Countries", value: "20+" },
               { label: "Events", value: "25+" },
-              { label: "Clients", value: "80+" },
+              { label: "Clients", value: "100+" },
               { label: "Products", value: "30k+" },
             ].map((stat, index) => (
               <motion.div
