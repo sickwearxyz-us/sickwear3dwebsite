@@ -555,7 +555,8 @@ export default function Home() {
             {[
               {
                 title: "Crypto Native",
-                description: "Built for Web3 communities with blockchain-first mindset.",
+                description:
+                  "Designed by a team that lives in Web3 — DAO-branded apparel, NFT community drops, and crypto payment support built in, not bolted on.",
               },
               {
                 title: "Premium Material",
