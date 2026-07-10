@@ -2,17 +2,15 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-
 const inter = Inter({ subsets: ["latin"] })
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sickwear.xyz"),
   title: {
-    default: "Sickwear – #1 Web3 Merch & Merchandise Partner for Global Communities",
+    default: "Sickwear – Web3, Event & Personalized Merch Partner",
     template: "%s | Sickwear",
   },
   description:
-    "Sickwear is the leading Web3 merchandise partner trusted by 80+ global companies including Coinbase, ETHGlobal, OKX, Polkadot & LayerZero. Premium custom merch, global shipping, crypto payments. Made in India.",
+    "Custom Web3, event & personalized merch trusted by Coinbase, ETHGlobal & 80+ global brands. Fast turnaround, crypto or fiat payment, worldwide shipping.",
   keywords: [
     "web3 merch",
     "web3 merchandise",
@@ -41,9 +39,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.sickwear.xyz",
     siteName: "Sickwear",
-    title: "Sickwear – #1 Web3 Merch Partner for Global Communities",
+    title: "Sickwear – Web3, Event & Personalized Merch Partner",
     description:
-      "Premium Web3 merchandise trusted by Coinbase, ETHGlobal, OKX, Polkadot & 80+ global companies. Custom merch, global shipping, crypto payments.",
+      "Custom Web3, event & personalized merch trusted by Coinbase, ETHGlobal & 80+ global brands. Fast turnaround, crypto or fiat payment, worldwide shipping.",
     images: [
       {
         url: "/images/sickwear-logo-color.png",
@@ -57,9 +55,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@sickwear_xyz",
     creator: "@sickwear_xyz",
-    title: "Sickwear – #1 Web3 Merch Partner",
+    title: "Sickwear – Web3, Event & Personalized Merch Partner",
     description:
-      "Premium Web3 merchandise trusted by 80+ global companies. Custom merch, global shipping, crypto payments.",
+      "Custom Web3, event & personalized merch trusted by 80+ global brands. Fast turnaround, crypto or fiat payment, worldwide shipping.",
     images: ["/images/sickwear-logo-color.png"],
   },
   robots: {
@@ -76,7 +74,6 @@ export const metadata: Metadata = {
     canonical: "https://www.sickwear.xyz",
   },
 }
-
 export default function RootLayout({
   children,
 }: {
@@ -96,7 +93,8 @@ export default function RootLayout({
               url: "https://www.sickwear.xyz",
               logo: "https://www.sickwear.xyz/images/sickwear-logo-color.png",
               description:
-                "Sickwear is the #1 Web3 merchandise partner trusted by 80+ global companies. Premium custom merch with global shipping and crypto payments.",
+                "Sickwear is a premium merchandise partner for Web3 communities, events, and personalized brand merch, trusted by 80+ global companies. Global shipping and crypto payments.",
+              dateModified: "2026-07-10",
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer service",
